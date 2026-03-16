@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC Deepika Ram — Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0D0F;--bg2:#111518;--bg3:#161B1F;--bg4:#1C2227;
+  --green:#2D6A4F;--green2:#40916C;--green3:#52B788;--green4:#74C69D;
+  --gold:#C9A84C;--gold2:#E8C97A;
+  --red:#E74C3C;--red2:#FF6B6B;
+  --white:#F0F4F8;--muted:#6B8A9A;--border:rgba(82,183,136,0.15);
+  --card:rgba(22,27,31,0.95);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;font-weight:300}
+
+/* ── LOGIN ── */
+#login-screen{
+  position:fixed;inset:0;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;z-index:1000;
+  background-image:radial-gradient(ellipse at 30% 50%,rgba(45,106,79,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 20%,rgba(201,168,76,0.05) 0%,transparent 50%);
+}
+.login-card{background:var(--bg2);border:1px solid var(--border);padding:52px 48px;width:420px;max-width:95vw}
+.login-logo{text-align:center;margin-bottom:36px}
+.login-logo h1{font-size:1.6rem;font-weight:500;letter-spacing:0.08em}
+.login-logo h1 em{color:var(--green3);font-style:normal}
+.login-logo p{font-size:0.72rem;color:var(--muted);letter-spacing:0.16em;text-transform:uppercase;margin-top:6px}
+.login-form{display:flex;flex-direction:column;gap:16px}
+.lf-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.lf-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(82,183,136,0.2);color:var(--white);padding:13px 16px;font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;transition:border-color .3s}
+.lf-input:focus{border-color:var(--green3)}
+.lf-input::placeholder{color:rgba(107,138,154,0.4)}
+.login-btn{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;padding:14px;font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:opacity .3s;margin-top:8px}
+.login-btn:hover{opacity:.88}
+.login-err{color:var(--red2);font-size:0.75rem;text-align:center;min-height:18px}
+.login-hint{text-align:center;font-size:0.7rem;color:var(--muted);margin-top:12px}
+
+/* ── MAIN LAYOUT ── */
+#app{display:none;height:100%;flex-direction:column}
+#app.visible{display:flex}
+
+/* top bar */
+.topbar{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:14px 28px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0
+}
+.topbar-logo{font-size:1.1rem;font-weight:500;letter-spacing:0.08em}
+.topbar-logo em{color:var(--green3);font-style:normal}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-status{display:flex;align-items:center;gap:8px;font-size:0.72rem;color:var(--green4)}
+.status-dot{width:7px;height:7px;background:var(--green3);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.logout-btn{background:transparent;border:1px solid rgba(231,76,60,0.3);color:var(--red2);padding:7px 16px;font-family:'Outfit',sans-serif;font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.logout-btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+/* body */
+.main-body{flex:1;display:flex;overflow:hidden}
+
+/* sidebar */
+.sidebar{
+  width:220px;background:var(--bg2);border-right:1px solid var(--border);
+  padding:24px 0;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto
+}
+.nav-section-label{font-size:0.55rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);padding:0 20px;margin-bottom:8px;margin-top:16px}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 20px;font-size:0.8rem;cursor:pointer;
+  color:var(--muted);transition:all .2s;border-left:2px solid transparent
+}
+.nav-item:hover{color:var(--white);background:rgba(82,183,136,0.06)}
+.nav-item.active{color:var(--green3);background:rgba(82,183,136,0.1);border-left-color:var(--green3)}
+.nav-item svg{width:16px;height:16px;flex-shrink:0}
+
+/* content */
+.content{flex:1;overflow-y:auto;padding:28px}
+
+/* panels */
+.panel{display:none}
+.panel.active{display:block}
+
+/* ── DASHBOARD HOME ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);padding:22px 20px}
+.stat-card .sc-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.stat-card .sc-num{font-size:2rem;font-weight:500;color:var(--green3);line-height:1}
+.stat-card .sc-sub{font-size:0.7rem;color:var(--muted);margin-top:4px}
+
+/* ── PHOTO MANAGER ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.section-title{font-size:1.1rem;font-weight:500;color:var(--white)}
+.section-desc{font-size:0.78rem;color:var(--muted);margin-top:3px}
+.btn-upload{
+  background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;
+  padding:10px 22px;font-family:'Outfit',sans-serif;font-size:0.68rem;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;transition:opacity .3s;
+  display:flex;align-items:center;gap:8px
+}
+.btn-upload:hover{opacity:.88}
+
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.photo-slot{
+  background:var(--bg3);border:1px solid var(--border);
+  position:relative;overflow:hidden;aspect-ratio:3/4;
+}
+.photo-slot.wide{aspect-ratio:16/9}
+.photo-slot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .4s}
+.photo-slot:hover img{transform:scale(1.04)}
+.photo-slot-empty{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+  color:var(--muted);cursor:pointer;transition:background .3s
+}
+.photo-slot-empty:hover{background:rgba(82,183,136,0.06)}
+.photo-slot-empty svg{width:28px;height:28px;opacity:.4}
+.photo-slot-empty span{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase}
+.photo-overlay{
+  position:absolute;inset:0;background:rgba(10,13,15,0);
+  display:flex;align-items:flex-end;padding:14px;
+  transition:background .3s;pointer-events:none
+}
+.photo-slot:hover .photo-overlay{background:rgba(10,13,15,0.75);pointer-events:auto}
+.photo-actions{display:flex;gap:8px;opacity:0;transform:translateY(8px);transition:all .3s}
+.photo-slot:hover .photo-actions{opacity:1;transform:translateY(0)}
+.pact-btn{
+  background:var(--bg4);border:1px solid var(--border);color:var(--white);
+  padding:7px 12px;font-family:'Outfit',sans-serif;font-size:0.62rem;
+  letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all .3s
+}
+.pact-btn:hover{background:var(--green);border-color:var(--green);color:#fff}
+.pact-btn.danger:hover{background:var(--red);border-color:var(--red)}
+.photo-label{
+  position:absolute;top:10px;left:10px;
+  background:rgba(10,13,15,0.85);padding:4px 10px;
+  font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--green4);
+  border:1px solid rgba(82,183,136,0.2)
+}
+
+/* hidden file input */
+.file-input{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;top:0;left:0}
+
+/* ── GALLERY MANAGER ── */
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.gal-item{background:var(--bg3);border:1px solid var(--border);aspect-ratio:3/4;position:relative;overflow:hidden}
+.gal-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gal-add{
+  aspect-ratio:3/4;background:var(--bg3);border:1px dashed rgba(82,183,136,0.3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;cursor:pointer;transition:all .3s;position:relative
+}
+.gal-add:hover{border-color:var(--green3);background:rgba(82,183,136,0.05)}
+.gal-add svg{width:24px;height:24px;color:var(--muted)}
+.gal-add span{font-size:0.65rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase}
+
+/* ── CONTACT SETTINGS ── */
+.settings-form{max-width:560px;display:flex;flex-direction:column;gap:20px}
+.sf-group{display:flex;flex-direction:column;gap:7px}
+.sf-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.sf-input{
+  background:var(--bg3);border:1px solid var(--border);color:var(--white);
+  padding:13px 15px;font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;
+  transition:border-color .3s
+}
+.sf-input:focus{border-color:var(--green3)}
+.save-btn{
+  background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;
+  padding:13px 32px;font-family:'Outfit',sans-serif;font-size:0.7rem;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;align-self:flex-start;
+  transition:opacity .3s
+}
+.save-btn:hover{opacity:.88}
+
+/* ── PREVIEW PANEL ── */
+.preview-bar{
+  background:var(--bg3);border-bottom:1px solid var(--border);
+  padding:12px 20px;display:flex;align-items:center;gap:12px
+}
+.preview-url{
+  flex:1;background:var(--bg4);border:1px solid var(--border);
+  color:var(--muted);padding:8px 14px;font-size:0.78rem;
+}
+.preview-iframe{width:100%;height:calc(100vh - 140px);border:none;background:#fff}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--bg2);border-left:3px solid var(--green3);
+  color:var(--white);padding:14px 20px;font-size:0.8rem;z-index:9999;
+  max-width:320px;transform:translateY(50px);opacity:0;transition:all .4s;
+  border-right:1px solid var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.err{border-left-color:var(--red2)}
+
+/* ── MODAL ── */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,0.75);
+  display:none;align-items:center;justify-content:center;z-index:500
+}
+.modal-bg.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);padding:36px;width:480px;max-width:95vw}
+.modal h3{font-size:1rem;font-weight:500;margin-bottom:8px}
+.modal p{font-size:0.82rem;color:var(--muted);margin-bottom:24px;line-height:1.7}
+.modal-btns{display:flex;gap:12px}
+.modal-btn{
+  padding:11px 24px;font-family:'Outfit',sans-serif;font-size:0.68rem;
+  letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:none
+}
+.modal-btn.primary{background:var(--green2);color:#fff}
+.modal-btn.primary:hover{background:var(--green3)}
+.modal-btn.ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.modal-btn.ghost:hover{border-color:var(--white);color:var(--white)}
+
+/* scrollbar */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* responsive */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <h1>MC <em>Deepika Ram</em></h1>
+      <p>Admin Dashboard</p>
+    </div>
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <div>
+        <label class="lf-label">Username</label>
+        <input class="lf-input" id="login-user" type="text" placeholder="admin" autocomplete="username">
+      </div>
+      <div>
+        <label class="lf-label">Password</label>
+        <input class="lf-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <div class="login-err" id="login-err"></div>
+      <button class="login-btn" type="submit">Sign In →</button>
+    </form>
+    <p class="login-hint">Default: admin / deepika2024</p>
+  </div>
+</div>
+
+<!-- ── MAIN APP ── -->
+<div id="app">
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-logo">MC <em>Deepika Ram</em> — Admin</div>
+    <div class="topbar-right">
+      <div class="topbar-status"><div class="status-dot"></div>Dashboard Active</div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="main-body">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <p class="nav-section-label">Main</p>
+      <div class="nav-item active" onclick="showPanel('dashboard',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Overview
+      </div>
+      <p class="nav-section-label">Media</p>
+      <div class="nav-item" onclick="showPanel('hero-photo',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Hero Photo
+      </div>
+      <div class="nav-item" onclick="showPanel('about-photo',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        About Photo
+      </div>
+      <div class="nav-item" onclick="showPanel('gallery',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        Gallery
+      </div>
+      <p class="nav-section-label">Website</p>
+      <div class="nav-item" onclick="showPanel('contact-info',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Contact Info
+      </div>
+      <div class="nav-item" onclick="showPanel('preview',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Preview Site
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+
+      <!-- ── OVERVIEW ── -->
+      <div class="panel active" id="panel-dashboard">
+        <div style="margin-bottom:24px">
+          <h2 style="font-size:1.3rem;font-weight:500">Welcome back 👋</h2>
+          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Manage your portfolio website from here</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="sc-label">Total Photos</div>
+            <div class="sc-num" id="stat-photos">0</div>
+            <div class="sc-sub">In gallery</div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-label">Experience</div>
+            <div class="sc-num">5+</div>
+            <div class="sc-sub">Years on stage</div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-label">Stage Shows</div>
+            <div class="sc-num">500+</div>
+            <div class="sc-sub">Events hosted</div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-label">Brands</div>
+            <div class="sc-num">40+</div>
+            <div class="sc-sub">Premium clients</div>
+          </div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);padding:24px;max-width:600px">
+          <h3 style="font-size:0.9rem;font-weight:500;margin-bottom:16px;color:var(--green4)">Quick Actions</h3>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div onclick="showPanel('hero-photo',document.querySelector('[onclick*=hero-photo]'))" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='var(--green3)'" onmouseout="this.style.borderColor='var(--border)'">
+              <span style="font-size:1.2rem">🖼️</span>
+              <div><div style="font-size:0.82rem;font-weight:500">Update Hero Photo</div><div style="font-size:0.72rem;color:var(--muted)">Main photo on homepage</div></div>
+              <span style="margin-left:auto;color:var(--muted)">→</span>
+            </div>
+            <div onclick="showPanel('gallery',document.querySelector('[onclick*=gallery]'))" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='var(--green3)'" onmouseout="this.style.borderColor='var(--border)'">
+              <span style="font-size:1.2rem">📸</span>
+              <div><div style="font-size:0.82rem;font-weight:500">Manage Gallery</div><div style="font-size:0.72rem;color:var(--muted)">Add or remove event photos</div></div>
+              <span style="margin-left:auto;color:var(--muted)">→</span>
+            </div>
+            <div onclick="showPanel('contact-info',document.querySelector('[onclick*=contact-info]'))" style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:border-color .3s" onmouseover="this.style.borderColor='var(--green3)'" onmouseout="this.style.borderColor='var(--border)'">
+              <span style="font-size:1.2rem">📞</span>
+              <div><div style="font-size:0.82rem;font-weight:500">Update Contact Details</div><div style="font-size:0.72rem;color:var(--muted)">Phone, email, social links</div></div>
+              <span style="margin-left:auto;color:var(--muted)">→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── HERO PHOTO ── -->
+      <div class="panel" id="panel-hero-photo">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Hero Photo</div>
+            <div class="section-desc">Main photo shown in the right side of the hero section</div>
+          </div>
+        </div>
+        <div class="photo-grid" style="grid-template-columns:repeat(2,1fr);max-width:700px">
+          <!-- Current -->
+          <div>
+            <p style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Current Photo</p>
+            <div class="photo-slot" id="hero-current">
+              <div class="photo-slot-empty" id="hero-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>No photo uploaded</span>
+              </div>
+            </div>
+          </div>
+          <!-- Upload new -->
+          <div>
+            <p style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Upload New</p>
+            <div class="photo-slot" style="border:1px dashed rgba(82,183,136,0.35);position:relative;cursor:pointer" onclick="document.getElementById('hero-file').click()" id="hero-drop">
+              <div class="photo-slot-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Click to upload</span>
+                <span style="font-size:0.6rem;color:rgba(107,138,154,0.5)">JPG, PNG, WEBP</span>
+              </div>
+              <input type="file" id="hero-file" accept="image/*" style="display:none" onchange="uploadPhoto('hero',this)">
+            </div>
+            <button class="save-btn" style="margin-top:14px;width:100%;justify-content:center;display:flex" onclick="applyPhoto('hero')">✓ Apply to Website</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ABOUT PHOTO ── -->
+      <div class="panel" id="panel-about-photo">
+        <div class="section-header">
+          <div>
+            <div class="section-title">About Section Photo</div>
+            <div class="section-desc">Portrait photo shown in the About section</div>
+          </div>
+        </div>
+        <div class="photo-grid" style="grid-template-columns:repeat(2,1fr);max-width:700px">
+          <div>
+            <p style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Current Photo</p>
+            <div class="photo-slot" id="about-current">
+              <div class="photo-slot-empty" id="about-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>No photo uploaded</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Upload New</p>
+            <div class="photo-slot" style="border:1px dashed rgba(82,183,136,0.35);cursor:pointer" onclick="document.getElementById('about-file').click()">
+              <div class="photo-slot-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Click to upload</span>
+                <span style="font-size:0.6rem;color:rgba(107,138,154,0.5)">JPG, PNG, WEBP</span>
+              </div>
+              <input type="file" id="about-file" accept="image/*" style="display:none" onchange="uploadPhoto('about',this)">
+            </div>
+            <button class="save-btn" style="margin-top:14px;width:100%;justify-content:center;display:flex" onclick="applyPhoto('about')">✓ Apply to Website</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── GALLERY ── -->
+      <div class="panel" id="panel-gallery">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Gallery Photos</div>
+            <div class="section-desc">Event photos shown in the portfolio gallery section</div>
+          </div>
+          <button class="btn-upload" onclick="document.getElementById('gallery-file').click()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Photos
+          </button>
+          <input type="file" id="gallery-file" accept="image/*" multiple style="display:none" onchange="addGalleryPhotos(this)">
+        </div>
+        <div class="gal-grid" id="gallery-grid">
+          <!-- gallery items rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ── CONTACT INFO ── -->
+      <div class="panel" id="panel-contact-info">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Contact Information</div>
+            <div class="section-desc">Update details shown on the website contact section</div>
+          </div>
+        </div>
+        <form class="settings-form" onsubmit="saveContactInfo(event)">
+          <div class="sf-group">
+            <label class="sf-label">Full Name</label>
+            <input class="sf-input" id="cf-name" type="text" placeholder="MC Deepika Ram" value="MC Deepika Ram">
+          </div>
+          <div class="sf-group">
+            <label class="sf-label">Phone / WhatsApp</label>
+            <input class="sf-input" id="cf-phone" type="text" placeholder="+91 72007 63802" value="+91 72007 63802">
+          </div>
+          <div class="sf-group">
+            <label class="sf-label">Email Address</label>
+            <input class="sf-input" id="cf-email" type="email" placeholder="deepikaramu1991@gmail.com" value="deepikaramu1991@gmail.com">
+          </div>
+          <div class="sf-group">
+            <label class="sf-label">Instagram URL</label>
+            <input class="sf-input" id="cf-instagram" type="url" placeholder="https://instagram.com/mc_deepikaram" value="https://www.instagram.com/mc_deepikaram">
+          </div>
+          <div class="sf-group">
+            <label class="sf-label">Coverage Area</label>
+            <input class="sf-input" id="cf-location" type="text" placeholder="Pan Tamil Nadu · Available Across India" value="Pan Tamil Nadu · Available Across India">
+          </div>
+          <div class="sf-group">
+            <label class="sf-label">Tagline / Bio (short)</label>
+            <textarea class="sf-input" id="cf-bio" rows="3" style="resize:vertical">Where Energy Meets Elegance on Stage. 5+ years · 500+ events · English & Tamil</textarea>
+          </div>
+          <button class="save-btn" type="submit">Save Changes</button>
+        </form>
+      </div>
+
+      <!-- ── PREVIEW ── -->
+      <div class="panel" id="panel-preview">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Live Preview</div>
+            <div class="section-desc">Preview how the website looks with current changes</div>
+          </div>
+          <button class="btn-upload" onclick="openWebsite()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open Full Site
+          </button>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);padding:20px;text-align:center;color:var(--muted)">
+          <div style="font-size:2rem;margin-bottom:12px">🌐</div>
+          <p style="font-size:0.88rem;margin-bottom:8px">To preview the website, download and open the portfolio file:</p>
+          <p style="font-size:0.75rem;color:var(--green4)">deepika-ram-green.html</p>
+          <p style="font-size:0.72rem;margin-top:12px;line-height:1.8;color:var(--muted)">
+            After making changes in this dashboard, export the updated portfolio<br>
+            using the <strong style="color:var(--green3)">Export Website</strong> button below
+          </p>
+          <button class="save-btn" style="margin:20px auto 0;display:flex;align-items:center;gap:8px" onclick="showToast('Export feature: Download & apply changes to your portfolio HTML file','success')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export Website
+          </button>
+        </div>
+        <!-- Change log -->
+        <div style="margin-top:20px;background:var(--bg2);border:1px solid var(--border);padding:20px">
+          <p style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--green4);margin-bottom:14px">Recent Changes</p>
+          <div id="change-log" style="display:flex;flex-direction:column;gap:8px">
+            <p style="font-size:0.78rem;color:var(--muted)">No changes yet this session.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main-body -->
+</div><!-- /app -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Modal -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">Confirm Action</h3>
+    <p id="modal-body">Are you sure?</p>
+    <div class="modal-btns">
+      <button class="modal-btn primary" id="modal-confirm">Confirm</button>
+      <button class="modal-btn ghost" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STATE ──
+const STATE = {
+  photos: { hero: null, about: null },
+  gallery: [],
+  contact: {
+    name: 'MC Deepika Ram',
+    phone: '+91 72007 63802',
+    email: 'deepikaramu1991@gmail.com',
+    instagram: 'https://www.instagram.com/mc_deepikaram',
+    location: 'Pan Tamil Nadu · Available Across India',
+    bio: 'Where Energy Meets Elegance on Stage. 5+ years · 500+ events · English & Tamil'
+  },
+  changes: []
+};
+
+// Load from localStorage
+function loadState() {
+  try {
+    const saved = localStorage.getItem('dr_admin_state');
+    if (saved) {
+      const s = JSON.parse(saved);
+      if (s.contact) STATE.contact = { ...STATE.contact, ...s.contact };
+      if (s.gallery) STATE.gallery = s.gallery;
+      if (s.photos) STATE.photos = { ...STATE.photos, ...s.photos };
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('dr_admin_state', JSON.stringify({
+      contact: STATE.contact,
+      gallery: STATE.gallery,
+      photos: { hero: STATE.photos.hero, about: STATE.photos.about }
+    }));
+  } catch(e) {}
+}
+
+// ── AUTH ──
+function handleLogin(e) {
+  e.preventDefault();
+  const u = document.getElementById('login-user').value;
+  const p = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-err');
+  if (u === 'admin' && p === 'deepika2024') {
+    document.getElementById('login-screen').style.opacity = '0';
+    document.getElementById('login-screen').style.transition = 'opacity .4s';
+    setTimeout(() => {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').classList.add('visible');
+      loadState();
+      initDashboard();
+    }, 400);
+  } else {
+    err.textContent = 'Invalid username or password';
+    setTimeout(() => err.textContent = '', 3000);
+  }
+}
+
+function logout() {
+  showModal('Logout', 'Are you sure you want to logout?', () => {
+    document.getElementById('app').classList.remove('visible');
+    document.getElementById('login-screen').style.opacity = '1';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+  });
+}
+
+// ── NAVIGATION ──
+function showPanel(name, navEl) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  if (navEl) navEl.classList.add('active');
+}
+
+// ── INIT ──
+function initDashboard() {
+  updateStats();
+  renderHeroPhoto();
+  renderAboutPhoto();
+  renderGallery();
+  loadContactForm();
+}
+
+function updateStats() {
+  document.getElementById('stat-photos').textContent = STATE.gallery.length;
+}
+
+// ── PHOTO UPLOAD ──
+function uploadPhoto(type, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    STATE.photos[type + '_pending'] = e.target.result;
+    // Show preview in the "Upload New" slot
+    const dropEl = document.getElementById(type + '-drop') || document.querySelector(`#panel-${type}-photo .photo-slot:last-child`);
+    const previewImg = document.createElement('img');
+    previewImg.src = e.target.result;
+    previewImg.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center;display:block';
+    const container = input.closest('.photo-slot');
+    container.innerHTML = '';
+    container.appendChild(previewImg);
+    showToast('Photo ready — click "Apply to Website" to save', 'success');
+  };
+  reader.readAsDataURL(file);
+}
+
+function applyPhoto(type) {
+  if (!STATE.photos[type + '_pending']) {
+    showToast('Please upload a photo first', 'err'); return;
+  }
+  STATE.photos[type] = STATE.photos[type + '_pending'];
+  delete STATE.photos[type + '_pending'];
+  saveState();
+  if (type === 'hero') renderHeroPhoto();
+  if (type === 'about') renderAboutPhoto();
+  logChange(`Updated ${type} photo`);
+  showToast(`${type.charAt(0).toUpperCase()+type.slice(1)} photo applied!`, 'success');
+}
+
+function renderHeroPhoto() {
+  const container = document.getElementById('hero-current');
+  if (STATE.photos.hero) {
+    container.innerHTML = `<img src="${STATE.photos.hero}" style="width:100%;height:100%;object-fit:cover;object-position:top center">
+    <div class="photo-label">Current</div>`;
+  } else {
+    container.innerHTML = `<div class="photo-slot-empty" id="hero-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px;opacity:.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase">No photo set</span></div>`;
+  }
+}
+
+function renderAboutPhoto() {
+  const container = document.getElementById('about-current');
+  if (STATE.photos.about) {
+    container.innerHTML = `<img src="${STATE.photos.about}" style="width:100%;height:100%;object-fit:cover;object-position:top center">
+    <div class="photo-label">Current</div>`;
+  } else {
+    container.innerHTML = `<div class="photo-slot-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px;opacity:.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase">No photo set</span></div>`;
+  }
+}
+
+// ── GALLERY ──
+function addGalleryPhotos(input) {
+  const files = Array.from(input.files);
+  let loaded = 0;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      STATE.gallery.push({ id: Date.now() + Math.random(), src: e.target.result, name: file.name });
+      loaded++;
+      if (loaded === files.length) {
+        saveState();
+        renderGallery();
+        updateStats();
+        logChange(`Added ${files.length} photo(s) to gallery`);
+        showToast(`${files.length} photo(s) added to gallery!`, 'success');
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+
+function removeGalleryPhoto(id) {
+  showModal('Remove Photo', 'Remove this photo from the gallery?', () => {
+    STATE.gallery = STATE.gallery.filter(p => p.id !== id);
+    saveState();
+    renderGallery();
+    updateStats();
+    logChange('Removed a gallery photo');
+    showToast('Photo removed', 'success');
+  });
+}
+
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  let html = '';
+  STATE.gallery.forEach(photo => {
+    html += `<div class="gal-item">
+      <img src="${photo.src}" alt="Gallery photo">
+      <div class="photo-overlay">
+        <div class="photo-actions">
+          <button class="pact-btn danger" onclick="removeGalleryPhoto(${photo.id})">Remove</button>
+        </div>
+      </div>
+    </div>`;
+  });
+  html += `<div class="gal-add" onclick="document.getElementById('gallery-file').click()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px;color:var(--muted)"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    <span>Add Photo</span>
+  </div>`;
+  grid.innerHTML = html;
+}
+
+// ── CONTACT ──
+function loadContactForm() {
+  document.getElementById('cf-name').value = STATE.contact.name;
+  document.getElementById('cf-phone').value = STATE.contact.phone;
+  document.getElementById('cf-email').value = STATE.contact.email;
+  document.getElementById('cf-instagram').value = STATE.contact.instagram;
+  document.getElementById('cf-location').value = STATE.contact.location;
+  document.getElementById('cf-bio').value = STATE.contact.bio;
+}
+
+function saveContactInfo(e) {
+  e.preventDefault();
+  STATE.contact = {
+    name: document.getElementById('cf-name').value,
+    phone: document.getElementById('cf-phone').value,
+    email: document.getElementById('cf-email').value,
+    instagram: document.getElementById('cf-instagram').value,
+    location: document.getElementById('cf-location').value,
+    bio: document.getElementById('cf-bio').value,
+  };
+  saveState();
+  logChange('Updated contact information');
+  showToast('Contact information saved!', 'success');
+}
+
+// ── CHANGE LOG ──
+function logChange(text) {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' });
+  STATE.changes.unshift({ text, time });
+  renderChangeLog();
+}
+
+function renderChangeLog() {
+  const log = document.getElementById('change-log');
+  if (STATE.changes.length === 0) {
+    log.innerHTML = '<p style="font-size:.78rem;color:var(--muted)">No changes yet this session.</p>';
+    return;
+  }
+  log.innerHTML = STATE.changes.slice(0,8).map(c => `
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 12px;background:var(--bg3);border-left:2px solid var(--green3)">
+      <span style="font-size:.65rem;color:var(--muted);min-width:42px">${c.time}</span>
+      <span style="font-size:.78rem">${c.text}</span>
+    </div>`).join('');
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = (type === 'success' ? '✓ ' : '⚠ ') + msg;
+  t.className = 'toast' + (type === 'err' ? ' err' : '');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// ── MODAL ──
+let modalCb;
+function showModal(title, body, cb) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').textContent = body;
+  document.getElementById('modal').classList.add('open');
+  modalCb = cb;
+  document.getElementById('modal-confirm').onclick = () => { closeModal(); if(modalCb) modalCb(); };
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function openWebsite() {
+  showToast('Download the portfolio HTML file to view the full website', 'success');
+}
+
+// Handle Enter key on login
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') {
+    handleLogin({ preventDefault: ()=>{} });
+  }
+});
+
+// Close modal on bg click
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal')) closeModal();
+});
+</script>
+</body>
+</html>
