@@ -4,614 +4,396 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MC Deepika Ram — Emcee · Celebrity Host · Corporate Presenter</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy: #0B1F3A;
-  --navy-2: #102447;
-  --navy-3: #162D56;
-  --gold: #D4A017;
-  --gold-light: #F0C040;
-  --gold-pale: #FBE89A;
-  --white: #FFFFFF;
-  --off-white: #F4F6FA;
-  --muted: #8A9BB8;
-  --accent: #E8F0FF;
+:root{
+  --white:#FFFFFF;
+  --off:#FDF8F5;
+  --off2:#F9F2EE;
+  --rg1:#B76E79;
+  --rg2:#C9858F;
+  --rg3:#E8B4BC;
+  --rg4:#F5D9DD;
+  --rg5:#FDF0F2;
+  --rg-dark:#8B4D56;
+  --rg-shine:#FFD4DA;
+  --champagne:#F7E7CE;
+  --dark:#1A0D0F;
+  --dark2:#2D1518;
+  --text:#3D1C20;
+  --muted:#9A7A7F;
+  --border:rgba(183,110,121,0.18);
+  --shadow:rgba(183,110,121,0.15);
 }
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--navy);
-  color: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  overflow-x: hidden;
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--text);font-family:'Raleway',sans-serif;font-weight:300;overflow-x:hidden}
 
 /* ── CURSOR ── */
-.cur { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
-.cur-r { width: 34px; height: 34px; border: 1.5px solid rgba(212,160,23,0.6); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: left .06s, top .06s; }
+.cur{width:10px;height:10px;background:var(--rg1);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.cur2{width:32px;height:32px;border:1.5px solid rgba(183,110,121,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .06s,top .06s}
 
 /* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 24px 60px;
-  transition: background .4s, padding .4s;
-}
-nav.s {
-  background: rgba(11,31,58,0.97);
-  backdrop-filter: blur(12px);
-  padding: 14px 60px;
-  border-bottom: 1px solid rgba(212,160,23,0.2);
-}
-.nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem; letter-spacing: 0.12em;
-  color: var(--white); text-decoration: none;
-}
-.nav-logo span { color: var(--gold); }
-.nav-links { display: flex; gap: 36px; list-style: none; }
-.nav-links a {
-  font-size: 0.68rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--muted);
-  text-decoration: none; transition: color .3s;
-}
-.nav-links a:hover { color: var(--gold); }
-.nav-cta {
-  background: var(--gold); color: var(--navy);
-  border: none; padding: 10px 26px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.68rem; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: background .3s;
-}
-.nav-cta:hover { background: var(--gold-light); }
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:26px 64px;transition:all .4s}
+nav.sc{background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);padding:16px 64px;box-shadow:0 2px 40px var(--shadow)}
+.nav-logo{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.1em;color:var(--dark);text-decoration:none}
+.nav-logo em{color:var(--rg1);font-style:normal}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--rg1)}
+.nav-cta{background:linear-gradient(135deg,var(--rg1),var(--rg2));color:#fff;border:none;padding:11px 28px;font-family:'Raleway',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:opacity .3s,transform .2s;border-radius:0}
+.nav-cta:hover{opacity:0.88;transform:translateY(-1px)}
 
 /* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: grid; grid-template-columns: 1.1fr 0.9fr;
-  position: relative; overflow: hidden;
-}
-.hero-left {
-  position: relative;
-  display: flex; flex-direction: column;
-  justify-content: center;
-  padding: 130px 60px 80px;
-  z-index: 2;
-}
-.hero-left::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(212,160,23,0.08) 0%, transparent 60%);
-  pointer-events: none;
-}
-/* big decorative text */
-.hero-bg-text {
-  position: absolute; top: 50%; left: -10px;
-  transform: translateY(-50%);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22vw; color: rgba(255,255,255,0.025);
-  line-height: 1; pointer-events: none; user-select: none;
-  white-space: nowrap; z-index: 0;
-}
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 0.62rem; letter-spacing: 0.28em;
-  text-transform: uppercase; color: var(--gold);
-  margin-bottom: 24px;
-  opacity: 0; animation: fadeUp .8s .3s ease forwards;
-}
-.hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
-.hero-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(4rem, 7vw, 7.5rem);
-  line-height: 0.92; letter-spacing: 0.04em;
-  color: var(--white); margin-bottom: 16px;
-  opacity: 0; animation: fadeUp .8s .5s ease forwards;
-}
-.hero-name .gold { color: var(--gold); }
-.hero-tagline {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic; font-size: 1.15rem;
-  color: var(--muted); margin-bottom: 32px;
-  opacity: 0; animation: fadeUp .8s .7s ease forwards;
-}
-.hero-desc {
-  font-size: 0.88rem; line-height: 1.9;
-  color: rgba(255,255,255,0.5);
-  max-width: 420px; margin-bottom: 48px;
-  opacity: 0; animation: fadeUp .8s .9s ease forwards;
-}
-.hero-stats {
-  display: flex; gap: 44px; margin-bottom: 48px;
-  opacity: 0; animation: fadeUp .8s 1.05s ease forwards;
-}
-.h-stat .num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.8rem; color: var(--gold-light);
-  line-height: 1; display: block;
-}
-.h-stat .lbl {
-  font-size: 0.6rem; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--muted);
-}
-.hero-btns {
-  display: flex; gap: 14px;
-  opacity: 0; animation: fadeUp .8s 1.2s ease forwards;
-}
-.btn-primary {
-  background: var(--gold); color: var(--navy);
-  border: none; padding: 14px 36px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: background .3s, transform .2s;
-  text-decoration: none; display: inline-block;
-}
-.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-.btn-ghost {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.7);
-  padding: 14px 36px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem; font-weight: 300;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: border-color .3s, color .3s;
-  text-decoration: none; display: inline-block;
-}
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.hero{min-height:100vh;background:linear-gradient(160deg,var(--white) 0%,var(--rg5) 40%,var(--off2) 100%);position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center}
 
-.hero-right {
-  position: relative; overflow: hidden;
-}
-.hero-right img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
-  display: block;
-}
-.hero-right::before {
-  content: '';
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to right, var(--navy) 0%, transparent 35%),
-              linear-gradient(to top, var(--navy) 0%, transparent 25%);
-}
-/* gold frame accent */
-.hero-frame {
-  position: absolute; bottom: 40px; right: 40px; z-index: 2;
-  width: 180px; height: 180px;
-  border: 2px solid rgba(212,160,23,0.4);
-  pointer-events: none;
-}
-.hero-frame::before {
-  content: '';
-  position: absolute; top: -12px; left: -12px; right: -12px; bottom: -12px;
-  border: 1px solid rgba(212,160,23,0.15);
-}
+/* diagonal slice */
+.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:120px;background:var(--white);clip-path:polygon(0 100%,100% 0,100% 100%);z-index:3}
+
+/* decorative circles */
+.hcircle{position:absolute;border-radius:50%;pointer-events:none}
+.hc1{width:700px;height:700px;background:radial-gradient(circle,rgba(183,110,121,0.06) 0%,transparent 70%);top:-200px;right:-200px}
+.hc2{width:400px;height:400px;background:radial-gradient(circle,rgba(201,133,143,0.08) 0%,transparent 70%);bottom:100px;left:-100px}
+.hc3{width:200px;height:200px;border:1px solid rgba(183,110,121,0.1);top:20%;right:10%;border-radius:50%;animation:spin 20s linear infinite}
+.hc4{width:120px;height:120px;border:1px solid rgba(183,110,121,0.15);top:15%;right:13%;border-radius:50%;animation:spin 14s linear infinite reverse}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* floating petals */
+.petal{position:absolute;font-size:1.4rem;opacity:0.12;animation:floatPetal 8s ease-in-out infinite;pointer-events:none}
+.p1{top:15%;left:5%;animation-delay:0s}
+.p2{top:60%;left:8%;animation-delay:2s;font-size:1rem}
+.p3{top:30%;right:5%;animation-delay:4s}
+.p4{bottom:20%;right:8%;animation-delay:1s;font-size:1rem}
+@keyframes floatPetal{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(15deg)}}
+
+.hero-left{padding:120px 60px 120px 64px;position:relative;z-index:2}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(183,110,121,0.1),rgba(232,180,188,0.15));border:1px solid rgba(183,110,121,0.25);padding:8px 18px;margin-bottom:28px;font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--rg1);opacity:0;animation:fadeUp .8s .3s ease forwards}
+.hero-tag-dot{width:6px;height:6px;background:var(--rg1);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(3rem,6vw,6.5rem);font-weight:900;line-height:0.92;letter-spacing:0.04em;color:var(--dark);margin-bottom:18px;opacity:0;animation:fadeUp .8s .5s ease forwards}
+.hero-title .rg{background:linear-gradient(135deg,var(--rg1),var(--rg2),var(--rg-shine));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-title .mc-pre{font-family:'Raleway',serif;font-size:0.22em;font-weight:300;letter-spacing:0.3em;color:var(--muted);display:block;margin-bottom:4px;-webkit-text-fill-color:var(--muted)}
+.hero-roles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;opacity:0;animation:fadeUp .8s .7s ease forwards}
+.role{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);color:var(--rg1);background:rgba(183,110,121,0.05)}
+.hero-desc{font-size:0.9rem;line-height:1.9;color:var(--muted);max-width:480px;margin-bottom:44px;opacity:0;animation:fadeUp .8s .9s ease forwards}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px;opacity:0;animation:fadeUp .8s 1.1s ease forwards}
+.btn-rg{background:linear-gradient(135deg,var(--rg1),var(--rg2));color:#fff;border:none;padding:16px 40px;font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:opacity .3s,transform .2s,box-shadow .3s;text-decoration:none;display:inline-block;box-shadow:0 8px 30px rgba(183,110,121,0.35)}
+.btn-rg:hover{opacity:0.9;transform:translateY(-3px);box-shadow:0 14px 40px rgba(183,110,121,0.45)}
+.btn-outline-rg{background:transparent;border:1.5px solid var(--rg1);color:var(--rg1);padding:16px 40px;font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-outline-rg:hover{background:var(--rg1);color:#fff}
+.hero-stats{display:flex;gap:0;border-top:1px solid var(--border);padding-top:32px;opacity:0;animation:fadeUp .8s 1.25s ease forwards}
+.hs{flex:1;text-align:center;padding:0 20px;border-right:1px solid var(--border)}
+.hs:first-child{padding-left:0;text-align:left}
+.hs:last-child{border-right:none}
+.hs-num{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--rg1),var(--rg2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1}
+.hs-lbl{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-top:4px;display:block}
+
+/* hero right visual */
+.hero-right{position:relative;height:100%;display:flex;align-items:center;justify-content:center;z-index:2;padding:120px 64px 120px 30px}
+.hero-visual-card{width:100%;max-width:420px;aspect-ratio:3/4;background:linear-gradient(145deg,var(--rg5),var(--rg4),var(--champagne));position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 30px 80px rgba(183,110,121,0.25)}
+.hvc-bg-text{font-family:'Cinzel',serif;font-size:9rem;font-weight:900;color:rgba(183,110,121,0.06);position:absolute;line-height:1;letter-spacing:-0.05em}
+.hvc-mic{font-size:8rem;opacity:0.12;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:floatMic 5s ease-in-out infinite}
+@keyframes floatMic{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,-58%)}}
+.hvc-content{position:relative;z-index:2;text-align:center;padding:32px}
+.hvc-title{font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:var(--rg-dark);margin-bottom:8px;letter-spacing:0.06em}
+.hvc-sub{font-family:'Raleway',sans-serif;font-size:0.65rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--rg1);margin-bottom:24px}
+.hvc-divider{width:60px;height:2px;background:linear-gradient(to right,var(--rg1),var(--rg3));margin:0 auto 24px}
+.hvc-tags{display:flex;flex-direction:column;gap:8px;align-items:center}
+.hvc-tag{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--rg-dark);background:rgba(183,110,121,0.1);padding:6px 18px;border:1px solid rgba(183,110,121,0.2)}
+/* corner accents */
+.hvc-corner{position:absolute;width:40px;height:40px}
+.hvc-tl{top:16px;left:16px;border-top:2px solid var(--rg1);border-left:2px solid var(--rg1)}
+.hvc-tr{top:16px;right:16px;border-top:2px solid var(--rg1);border-right:2px solid var(--rg1)}
+.hvc-bl{bottom:16px;left:16px;border-bottom:2px solid var(--rg1);border-left:2px solid var(--rg1)}
+.hvc-br{bottom:16px;right:16px;border-bottom:2px solid var(--rg1);border-right:2px solid var(--rg1)}
+/* shadow card behind */
+.hero-shadow-card{position:absolute;width:90%;aspect-ratio:3/4;background:linear-gradient(145deg,var(--rg3),var(--rg4));top:50%;left:50%;transform:translate(-40%,-46%) rotate(5deg);z-index:-1;opacity:0.5}
+
+/* ── DIAGONAL SECTIONS ── */
+.diag{position:relative}
+.diag::before{content:'';position:absolute;top:-60px;left:0;right:0;height:120px;background:inherit;clip-path:polygon(0 100%,100% 0,100% 100%);z-index:1}
+.diag::after{content:'';position:absolute;bottom:-60px;left:0;right:0;height:120px;background:inherit;clip-path:polygon(0 0,100% 0,0 100%);z-index:1}
 
 /* ── SECTION BASE ── */
-.sec { padding: 100px 60px; }
-.sec-label {
-  font-size: 0.6rem; letter-spacing: 0.3em;
-  text-transform: uppercase; color: var(--gold);
-  text-align: center; margin-bottom: 12px;
-}
-.sec-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
-  letter-spacing: 0.06em; text-align: center;
-  margin-bottom: 14px; line-height: 1;
-}
-.sec-title .gold { color: var(--gold); }
-.sec-sub {
-  text-align: center; font-size: 0.85rem;
-  color: var(--muted); line-height: 1.8;
-  max-width: 520px; margin: 0 auto 64px;
-}
-.divider {
-  display: flex; align-items: center;
-  gap: 16px; margin: 0 auto 64px; max-width: 160px;
-}
-.divider::before, .divider::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold));
-}
-.divider::after { background: linear-gradient(to left, transparent, var(--gold)); }
-.divider-star { color: var(--gold); font-size: 0.7rem; }
+.sec{padding:110px 64px;position:relative}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--rg1);margin-bottom:12px}
+.sec-eyebrow::before{content:'';width:28px;height:1px;background:linear-gradient(to right,var(--rg1),var(--rg3))}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(2rem,4vw,3.6rem);font-weight:700;line-height:1;margin-bottom:16px;color:var(--dark);letter-spacing:0.04em}
+.sec-title .rg{background:linear-gradient(135deg,var(--rg1),var(--rg2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-p{font-size:0.88rem;line-height:1.9;color:var(--muted);max-width:520px}
+.center{text-align:center}
+.center .sec-p{margin:0 auto}
+.center .sec-eyebrow{justify-content:center}
 
 /* ── ABOUT ── */
-.about { background: var(--navy-2); }
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-  max-width: 1200px; margin: 0 auto; align-items: center;
-}
-.about-img-wrap { position: relative; }
-.about-img {
-  width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
-}
-.about-img-border {
-  position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px;
-  border: 2px solid rgba(212,160,23,0.3); z-index: -1;
-}
-.about-content .sec-title { text-align: left; }
-.about-content .sec-label { text-align: left; }
-.about-content .sec-sub { text-align: left; margin: 0 0 36px; }
-.about-traits {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px;
-}
-.trait {
-  border-left: 2px solid var(--gold);
-  padding-left: 14px;
-}
-.trait h4 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1rem; color: var(--gold-light); margin-bottom: 6px;
-}
-.trait p { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
-.lang-badges { display: flex; gap: 10px; margin-top: 28px; }
-.badge {
-  background: rgba(212,160,23,0.12);
-  border: 1px solid rgba(212,160,23,0.35);
-  color: var(--gold-light);
-  font-size: 0.65rem; letter-spacing: 0.14em;
-  text-transform: uppercase; padding: 7px 16px;
-}
+.about{background:var(--off);padding-top:160px;padding-bottom:160px}
+.about-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;max-width:1280px;margin:0 auto;align-items:center}
+.about-img-area{position:relative}
+.about-img-box{aspect-ratio:3/4;background:linear-gradient(145deg,var(--rg5),var(--rg4),var(--champagne));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(183,110,121,0.2)}
+.about-img-box .mic-big{font-size:10rem;opacity:0.07;position:absolute}
+.about-img-box .ai-content{position:relative;z-index:2;text-align:center}
+.about-img-box .ai-content .big-init{font-family:'Cinzel',serif;font-size:7rem;font-weight:900;color:rgba(139,77,86,0.15);line-height:1}
+.about-img-box .ai-name-tag{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(183,110,121,0.9),transparent);padding:28px 24px}
+.about-img-box .ai-name-tag h3{font-family:'Cinzel',serif;font-size:1.5rem;color:#fff;letter-spacing:0.08em}
+.about-img-box .ai-name-tag p{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.75)}
+.about-accent-box{position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:linear-gradient(135deg,var(--rg3),var(--rg4));z-index:-1}
+.about-accent-box2{position:absolute;bottom:-20px;left:-20px;width:60px;height:60px;border:2px solid var(--rg3);z-index:-1}
+.about-right .sec-p{margin-bottom:20px}
+.about-traits{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
+.atrait{background:var(--white);border:1px solid var(--border);padding:22px 20px;transition:transform .3s,box-shadow .3s;border-left:3px solid var(--rg1)}
+.atrait:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(183,110,121,0.12)}
+.atrait h4{font-family:'Cinzel',serif;font-size:0.9rem;color:var(--rg1);margin-bottom:8px;letter-spacing:0.04em}
+.atrait p{font-size:0.76rem;line-height:1.7;color:var(--muted)}
+.lang-pills{display:flex;gap:10px;margin-top:24px}
+.lpill{background:linear-gradient(135deg,var(--rg1),var(--rg2));color:#fff;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;padding:8px 20px;font-weight:500}
 
 /* ── SERVICES ── */
-.services { background: var(--navy); }
-.svc-grid {
-  display: grid; grid-template-columns: repeat(3,1fr);
-  gap: 1px; max-width: 1200px; margin: 0 auto;
-  background: rgba(212,160,23,0.1);
-}
-.svc-card {
-  background: var(--navy);
-  padding: 44px 36px;
-  position: relative; overflow: hidden;
-  transition: background .3s;
-}
-.svc-card::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 2px; background: var(--gold);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .4s;
-}
-.svc-card:hover::after { transform: scaleX(1); }
-.svc-card:hover { background: var(--navy-2); }
-.svc-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 4rem; color: rgba(212,160,23,0.12);
-  line-height: 1; margin-bottom: 16px;
-}
-.svc-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
-.svc-card h3 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.3rem; margin-bottom: 12px; color: var(--white);
-}
-.svc-card p { font-size: 0.8rem; line-height: 1.8; color: var(--muted); }
+.services{background:var(--white);padding-top:160px;padding-bottom:160px}
+.svc-intro{display:flex;justify-content:space-between;align-items:flex-end;max-width:1280px;margin:0 auto 56px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1280px;margin:0 auto}
+.scard{background:var(--white);border:1px solid var(--border);padding:44px 36px;position:relative;overflow:hidden;transition:all .35s;cursor:default}
+.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--rg1),var(--rg3));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.scard:hover::before{transform:scaleX(1)}
+.scard:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(183,110,121,0.15)}
+.scard-num{font-family:'Cinzel',serif;font-size:3.5rem;font-weight:700;color:rgba(183,110,121,0.08);line-height:1;margin-bottom:16px}
+.scard-icon{font-size:2.2rem;margin-bottom:16px;display:block}
+.scard h3{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--dark);margin-bottom:12px;letter-spacing:0.04em}
+.scard p{font-size:0.78rem;line-height:1.8;color:var(--muted)}
+.scard-tag{display:inline-block;margin-top:18px;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--rg1);background:rgba(183,110,121,0.08);border:1px solid rgba(183,110,121,0.2);padding:5px 12px}
 
-/* ── CLIENTELE ── */
-.clients { background: var(--navy-2); }
-.clients-marquee-wrap { overflow: hidden; padding: 20px 0; margin-bottom: 16px; }
-.clients-marquee {
-  display: flex; gap: 40px; width: max-content;
-  animation: marquee 28s linear infinite;
-}
-.clients-marquee2 {
-  animation-direction: reverse; animation-duration: 32s;
-}
-.client-badge {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(212,160,23,0.15);
-  padding: 10px 24px;
-  font-size: 0.72rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--muted);
-  white-space: nowrap; transition: color .3s, border-color .3s;
-}
-.client-badge:hover { color: var(--gold); border-color: var(--gold); }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
+/* ── CLIENTS ── */
+.clients{background:var(--rg5);padding:100px 0}
+.cl-head{text-align:center;padding:0 64px 56px}
+.mwrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;margin-bottom:1px}
+.mwrap2{overflow:hidden;border-bottom:1px solid var(--border);padding:14px 0}
+.mtrack{display:flex;width:max-content;animation:mslide 28s linear infinite}
+.mtrack2{animation-direction:reverse;animation-duration:34s}
+.mitem{padding:0 36px;border-right:1px solid var(--border);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:color .3s;display:flex;align-items:center;gap:10px}
+.mitem:hover{color:var(--rg1)}
+.mdot{width:4px;height:4px;background:var(--rg1);border-radius:50%;opacity:0.5}
+@keyframes mslide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ── GALLERY ── */
-.gallery { background: var(--navy); }
-.gallery-tabs {
-  display: flex; justify-content: center; gap: 4px;
-  margin-bottom: 48px;
-}
-.tab-btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: var(--muted);
-  padding: 9px 22px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.65rem; letter-spacing: 0.16em;
-  text-transform: uppercase; cursor: pointer;
-  transition: all .3s;
-}
-.tab-btn.active, .tab-btn:hover {
-  background: var(--gold); color: var(--navy);
-  border-color: var(--gold);
-}
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 6px; max-width: 1200px; margin: 0 auto;
-}
-.g-item {
-  position: relative; overflow: hidden;
-  aspect-ratio: 3/4; cursor: pointer;
-}
-.g-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
-.g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
-.g-item:hover img { transform: scale(1.06); }
-.g-overlay {
-  position: absolute; inset: 0;
-  background: rgba(11,31,58,0); transition: background .4s;
-  display: flex; align-items: flex-end; padding: 16px;
-}
-.g-item:hover .g-overlay { background: rgba(11,31,58,0.65); }
-.g-label {
-  font-size: 0.65rem; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--gold);
-  opacity: 0; transform: translateY(8px);
-  transition: opacity .3s, transform .3s;
-}
-.g-item:hover .g-label { opacity: 1; transform: translateY(0); }
+.gallery{background:var(--white);padding-top:160px;padding-bottom:160px}
+.gal-head{display:flex;justify-content:space-between;align-items:flex-end;max-width:1280px;margin:0 auto 48px}
+.gal-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:280px 280px;gap:12px;max-width:1280px;margin:0 auto}
+.gi{overflow:hidden;position:relative;cursor:pointer}
+.gi:nth-child(1){grid-column:span 3;grid-row:span 2}
+.gi:nth-child(2){grid-column:span 2}
+.gi:nth-child(3){grid-column:span 1}
+.gi:nth-child(4){grid-column:span 1}
+.gi:nth-child(5){grid-column:span 2}
+.gi:nth-child(6){grid-column:span 3}
+.gi-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:transform .5s}
+.gi:hover .gi-inner{transform:scale(1.04)}
+.gi-icon{font-size:2.8rem;opacity:0.4;transition:opacity .3s}
+.gi:hover .gi-icon{opacity:0.7}
+.gi-label{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(139,77,86,0.6)}
+.gi-overlay{position:absolute;inset:0;background:rgba(183,110,121,0);transition:background .4s;display:flex;align-items:flex-end;padding:18px}
+.gi:hover .gi-overlay{background:rgba(183,110,121,0.55)}
+.gi-tag{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.12em;color:#fff;opacity:0;transform:translateY(6px);transition:all .3s}
+.gi:hover .gi-tag{opacity:1;transform:translateY(0)}
 
 /* ── TESTIMONIALS ── */
-.testimonials { background: var(--navy-2); }
-.testi-grid {
-  display: grid; grid-template-columns: repeat(3,1fr);
-  gap: 20px; max-width: 1200px; margin: 0 auto;
-}
-.testi-card {
-  background: var(--navy);
-  border: 1px solid rgba(212,160,23,0.12);
-  padding: 36px 30px; position: relative;
-  transition: border-color .3s;
-}
-.testi-card:hover { border-color: rgba(212,160,23,0.4); }
-.quote-mark {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 5rem; color: rgba(212,160,23,0.12);
-  line-height: 0.7; margin-bottom: 16px;
-}
-.testi-text {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic; font-size: 0.95rem;
-  line-height: 1.8; color: var(--off-white);
-  margin-bottom: 24px;
-}
-.testi-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 18px; }
-.testi-author { display: flex; align-items: center; gap: 12px; }
-.tav {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem; color: var(--navy);
-}
-.tname { font-size: 0.82rem; font-weight: 500; }
-.tsub { font-size: 0.68rem; color: var(--muted); }
+.testi{background:linear-gradient(135deg,var(--rg-dark) 0%,var(--rg1) 50%,var(--rg2) 100%);padding-top:160px;padding-bottom:160px;position:relative;overflow:hidden}
+.testi::before{content:'';position:absolute;top:-60px;left:0;right:0;height:120px;background:var(--white);clip-path:polygon(0 0,100% 0,0 100%)}
+.testi::after{content:'';position:absolute;bottom:-60px;left:0;right:0;height:120px;background:var(--off);clip-path:polygon(0 0,100% 100%,0 100%)}
+.testi .sec-title{color:#fff}
+.testi .sec-eyebrow{color:var(--rg-shine)}
+.testi .sec-eyebrow::before{background:var(--rg-shine)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1280px;margin:0 auto}
+.tcard{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);padding:40px 36px;transition:transform .3s,background .3s}
+.tcard:hover{transform:translateY(-6px);background:rgba(255,255,255,0.15)}
+.tq{font-family:'Cinzel',serif;font-size:4.5rem;color:rgba(255,255,255,0.15);line-height:0.7;margin-bottom:18px}
+.tstars{color:var(--champagne);letter-spacing:4px;font-size:0.75rem;margin-bottom:14px}
+.ttext{font-family:'Raleway',sans-serif;font-style:italic;font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.9);margin-bottom:26px}
+.tauthor{display:flex;align-items:center;gap:14px;border-top:1px solid rgba(255,255,255,0.15);padding-top:20px}
+.tav{width:44px;height:44px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:#fff}
+.tname{font-size:0.82rem;font-weight:600;color:#fff}
+.tco{font-size:0.65rem;color:rgba(255,255,255,0.6);letter-spacing:0.08em}
 
 /* ── CONTACT ── */
-.contact { background: var(--navy-3); }
-.contact-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px;
-  align-items: start;
-}
-.contact-left h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.4rem; letter-spacing: 0.06em;
-  margin-bottom: 16px; line-height: 1.1;
-}
-.contact-left p { font-size: 0.85rem; color: var(--muted); line-height: 1.9; margin-bottom: 40px; }
-.c-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
-.c-icon {
-  width: 44px; height: 44px; flex-shrink: 0;
-  border: 1px solid rgba(212,160,23,0.3);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gold); font-size: 1rem;
-}
-.c-item label {
-  display: block; font-size: 0.58rem;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 4px;
-}
-.c-item a, .c-item span {
-  font-size: 0.9rem; color: var(--white); text-decoration: none;
-  transition: color .3s;
-}
-.c-item a:hover { color: var(--gold); }
-.social-row { display: flex; gap: 12px; margin-top: 32px; }
-.soc-btn {
-  width: 40px; height: 40px;
-  border: 1px solid rgba(212,160,23,0.25);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--muted); transition: all .3s;
-  text-decoration: none;
-}
-.soc-btn:hover { border-color: var(--gold); color: var(--gold); }
-.soc-btn svg { width: 16px; height: 16px; }
+.contact{background:var(--off);padding-top:160px;padding-bottom:110px}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:90px;max-width:1280px;margin:0 auto;align-items:start}
+.contact-left h3{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;margin-bottom:16px;color:var(--dark)}
+.contact-left p{font-size:0.86rem;line-height:1.9;color:var(--muted);margin-bottom:36px}
+.ci-list{display:flex;flex-direction:column;gap:18px;margin-bottom:36px}
+.ci{display:flex;align-items:flex-start;gap:16px}
+.ci-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--rg1),var(--rg2));display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;flex-shrink:0}
+.ci label{display:block;font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--rg1);margin-bottom:4px}
+.ci a,.ci span{font-size:0.88rem;color:var(--dark);text-decoration:none;transition:color .3s}
+.ci a:hover{color:var(--rg1)}
+.soc{display:flex;gap:10px}
+.sbtn{width:42px;height:42px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .3s}
+.sbtn:hover{border-color:var(--rg1);color:var(--rg1);background:rgba(183,110,121,0.06)}
+.sbtn svg{width:15px;height:15px}
 
 /* ── FORM ── */
-.contact-form { display: flex; flex-direction: column; gap: 16px; }
-.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.f-field { display: flex; flex-direction: column; gap: 7px; }
-.f-field label {
-  font-size: 0.58rem; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--muted);
-}
-.f-field input, .f-field select, .f-field textarea {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: var(--white); padding: 13px 16px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem; outline: none;
-  transition: border-color .3s; -webkit-appearance: none;
-}
-.f-field input::placeholder, .f-field textarea::placeholder { color: rgba(138,155,184,0.4); }
-.f-field input:focus, .f-field select:focus, .f-field textarea:focus { border-color: var(--gold); }
-.f-field textarea { resize: vertical; min-height: 120px; }
-.f-field select option { background: var(--navy-2); }
-.f-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.f-submit {
-  background: var(--gold); color: var(--navy); border: none;
-  padding: 14px 36px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: background .3s, transform .2s;
-}
-.f-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
-.f-wa {
-  background: #25D366; color: #fff; border: none;
-  padding: 14px 28px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  cursor: pointer; transition: opacity .3s;
-  display: flex; align-items: center; gap: 8px;
-}
-.f-wa:hover { opacity: 0.88; }
+.cform{background:var(--white);padding:48px 44px;box-shadow:0 20px 60px rgba(183,110,121,0.1);display:flex;flex-direction:column;gap:16px}
+.cform-title{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--dark);margin-bottom:8px;letter-spacing:0.06em}
+.crow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cf{display:flex;flex-direction:column;gap:7px}
+.cf label{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.cf input,.cf select,.cf textarea{background:var(--off);border:1px solid var(--border);color:var(--text);padding:13px 16px;font-family:'Raleway',sans-serif;font-size:0.85rem;outline:none;transition:border-color .3s;-webkit-appearance:none}
+.cf input::placeholder,.cf textarea::placeholder{color:rgba(154,122,127,0.4)}
+.cf input:focus,.cf select:focus,.cf textarea:focus{border-color:var(--rg1)}
+.cf textarea{resize:vertical;min-height:110px}
+.cf select option{background:#fff}
+.cbtns{display:flex;gap:12px;flex-wrap:wrap}
+.cbtn{background:linear-gradient(135deg,var(--rg1),var(--rg2));color:#fff;border:none;padding:15px 34px;font-family:'Raleway',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;transition:opacity .3s,transform .2s,box-shadow .3s;box-shadow:0 8px 24px rgba(183,110,121,0.3)}
+.cbtn:hover{opacity:0.88;transform:translateY(-2px);box-shadow:0 12px 32px rgba(183,110,121,0.4)}
+.cbtn-wa{background:#25D366;color:#fff;border:none;padding:15px 24px;font-family:'Raleway',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;transition:opacity .3s}
+.cbtn-wa:hover{opacity:0.88}
 
 /* ── FOOTER ── */
-footer {
-  background: var(--navy);
-  border-top: 1px solid rgba(212,160,23,0.15);
-  padding: 40px 60px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.f-brand {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem; letter-spacing: 0.1em;
-}
-.f-brand span { color: var(--gold); }
-.f-copy { font-size: 0.68rem; color: var(--muted); }
+footer{background:var(--dark2);padding:44px 64px;display:flex;align-items:center;justify-content:space-between}
+.flogo{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:700;color:#fff;letter-spacing:0.1em}
+.flogo em{background:linear-gradient(135deg,var(--rg1),var(--rg3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
+.fcopy{font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.08em}
+.fcontact{font-size:0.7rem;color:var(--rg3);letter-spacing:0.1em}
 
 /* ── TOAST ── */
-.toast {
-  position: fixed; bottom: 28px; right: 28px;
-  background: var(--navy-2);
-  border-left: 3px solid var(--gold);
-  color: var(--white); padding: 16px 24px;
-  font-size: 0.8rem; z-index: 999; max-width: 320px;
-  transform: translateY(60px); opacity: 0;
-  transition: transform .4s, opacity .4s;
-}
-.toast.show { transform: translateY(0); opacity: 1; }
+.toast{position:fixed;bottom:28px;right:28px;background:var(--white);border-left:3px solid var(--rg1);color:var(--text);padding:16px 24px;font-size:0.8rem;z-index:999;max-width:340px;transform:translateY(60px);opacity:0;transition:transform .4s,opacity .4s;box-shadow:0 10px 40px rgba(183,110,121,0.2)}
+.toast.show{transform:translateY(0);opacity:1}
 
 /* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  nav { padding: 20px 28px; }
-  nav.s { padding: 14px 28px; }
-  .sec { padding: 70px 28px; }
-  .hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  .hero-left { min-height: 100vh; padding: 100px 28px 60px; }
-  .about-grid { grid-template-columns: 1fr; }
-  .svc-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: repeat(2,1fr); }
-  .g-item.wide { grid-column: auto; aspect-ratio: 3/4; }
-  .testi-grid { grid-template-columns: 1fr; }
-  .contact-inner { grid-template-columns: 1fr; gap: 44px; }
-  footer { flex-direction: column; gap: 16px; text-align: center; }
+@media(max-width:1100px){
+  nav{padding:20px 28px}nav.sc{padding:14px 28px}
+  .sec{padding:80px 28px}
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:120px 28px 100px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+  .about-wrap{grid-template-columns:1fr;gap:44px}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .gal-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+  .gi:nth-child(n){grid-column:auto;grid-row:auto}
+  .tgrid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr;gap:44px}
+  footer{flex-direction:column;gap:16px;text-align:center}
+  .svc-intro,.gal-head{flex-direction:column;align-items:flex-start;gap:16px}
 }
-@media (max-width: 640px) {
-  .f-row { grid-template-columns: 1fr; }
-  .hero-stats { gap: 24px; }
-  nav .nav-links, nav .nav-cta { display: none; }
+@media(max-width:640px){
+  nav .nav-links,nav .nav-cta{display:none}
+  .crow{grid-template-columns:1fr}
+  .about-traits{grid-template-columns:1fr}
+  .hero-stats{flex-wrap:wrap;gap:20px}
+  .hs{border:none!important;padding:0!important}
 }
 </style>
 </head>
 <body>
 
 <div class="cur" id="cur"></div>
-<div class="cur-r" id="curR"></div>
+<div class="cur2" id="cur2"></div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">MC <span>Deepika Ram</span></a>
+  <a href="#" class="nav-logo">MC <em>DEEPIKA RAM</em></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#clients">Clients</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact">Book</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Now</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
+  <div class="hcircle hc1"></div>
+  <div class="hcircle hc2"></div>
+  <div class="hcircle hc3"></div>
+  <div class="hcircle hc4"></div>
+  <div class="petal p1">🌸</div>
+  <div class="petal p2">✨</div>
+  <div class="petal p3">🌹</div>
+  <div class="petal p4">💫</div>
+
   <div class="hero-left">
-    <div class="hero-bg-text">DR</div>
-    <span class="hero-tag">Emcee · Celebrity Host · Corporate Presenter</span>
-    <h1 class="hero-name">DEEPIKA<br><span class="gold">RAM</span></h1>
-    <p class="hero-tagline">Where Energy Meets Elegance on Stage</p>
-    <p class="hero-desc">Renowned for an eloquent, enthusiastic & entertaining stage presence. Fluent in English & Tamil. Trusted by Samsung, Zoho, TCS, Royal Enfield, Malabar Gold and 40+ more premium brands.</p>
-    <div class="hero-stats">
-      <div class="h-stat"><span class="num">5+</span><span class="lbl">Years Experience</span></div>
-      <div class="h-stat"><span class="num">500+</span><span class="lbl">Stage Shows</span></div>
-      <div class="h-stat"><span class="num">2</span><span class="lbl">Languages</span></div>
+    <div class="hero-tag"><span class="hero-tag-dot"></span>Available for Events · Tamil Nadu & Pan India</div>
+    <h1 class="hero-title">
+      <span class="mc-pre">MC · Emcee</span>
+      DEEPIKA
+      <span class="rg">RAM</span>
+    </h1>
+    <div class="hero-roles">
+      <span class="role">Emcee</span>
+      <span class="role">Celebrity Host</span>
+      <span class="role">Corporate Presenter</span>
     </div>
+    <p class="hero-desc">Where Energy Meets Elegance on Stage. Renowned for an eloquent, enthusiastic & entertaining presence across Weddings, Corporate Events, Cultural Shows & more. Fluent in English & Tamil.</p>
     <div class="hero-btns">
-      <a href="#services" class="btn-primary">My Services</a>
-      <a href="#contact" class="btn-ghost">Book Me</a>
+      <a href="#contact" class="btn-rg">Book Deepika</a>
+      <a href="#services" class="btn-outline-rg">View Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><span class="hs-num">5+</span><span class="hs-lbl">Years on Stage</span></div>
+      <div class="hs"><span class="hs-num">500+</span><span class="hs-lbl">Stage Shows</span></div>
+      <div class="hs"><span class="hs-num">40+</span><span class="hs-lbl">Premium Brands</span></div>
+      <div class="hs"><span class="hs-num">2</span><span class="hs-lbl">Languages</span></div>
     </div>
   </div>
+
   <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=900&q=80" alt="Deepika Ram on Stage">
-    <div class="hero-frame"></div>
+    <div class="hero-shadow-card"></div>
+    <div class="hero-visual-card">
+      <div class="hvc-bg-text">DR</div>
+      <div class="hvc-mic">🎙️</div>
+      <div class="hvc-content">
+        <div class="hvc-title">DEEPIKA RAM</div>
+        <div class="hvc-sub">Emcee · Celebrity Host</div>
+        <div class="hvc-divider"></div>
+        <div class="hvc-tags">
+          <span class="hvc-tag">✦ Corporate Events</span>
+          <span class="hvc-tag">✦ Weddings</span>
+          <span class="hvc-tag">✦ Cultural Shows</span>
+          <span class="hvc-tag">✦ Team Building</span>
+        </div>
+      </div>
+      <div class="hvc-corner hvc-tl"></div>
+      <div class="hvc-corner hvc-tr"></div>
+      <div class="hvc-corner hvc-bl"></div>
+      <div class="hvc-corner hvc-br"></div>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section class="sec about" id="about">
-  <div class="about-grid">
-    <div class="about-img-wrap reveal">
-      <img class="about-img" src="https://images.unsplash.com/photo-1559523182-a284c3fb7cff?w=800&q=80" alt="Deepika Ram">
-      <div class="about-img-border"></div>
-    </div>
-    <div class="about-content">
-      <p class="sec-label">The Artist</p>
-      <h2 class="sec-title" style="text-align:left;font-size:clamp(2.2rem,4vw,3.5rem)">ABOUT <span class="gold">DEEPIKA</span></h2>
-      <p class="sec-sub" style="text-align:left;margin:0 0 28px">A powerhouse of energy and elegance, Deepika Ram has captivated audiences at over 500 live events across South India — from grand corporate galas to intimate weddings and star-studded cultural shows.</p>
-      <p class="sec-sub" style="text-align:left;margin:0 0 0">With 5+ years of professional hosting experience, she is celebrated for her quick wit, audience engagement, and seamless event coordination that keeps every program flowing flawlessly.</p>
-      <div class="about-traits">
-        <div class="trait reveal">
-          <h4>Stage Presence</h4>
-          <p>Eloquent, enthusiastic & entertaining — every time, without exception.</p>
+  <div class="about-wrap">
+    <div class="about-img-area reveal">
+      <div class="about-img-box">
+        <div class="mic-big">🎤</div>
+        <div class="ai-content">
+          <div class="big-init">DR</div>
+          <div style="font-size:3rem;margin-top:-10px">🎙️</div>
         </div>
-        <div class="trait reveal">
-          <h4>Audience Expert</h4>
-          <p>Engages crowds with humor, confidence and lightning-quick thinking.</p>
-        </div>
-        <div class="trait reveal">
-          <h4>Team Builder</h4>
-          <p>Specializes in corporate team-building events that inspire and unite.</p>
-        </div>
-        <div class="trait reveal">
-          <h4>Client-First</h4>
-          <p>Works closely with clients to deliver a personalized event experience.</p>
+        <div class="ai-name-tag">
+          <p>Emcee · Celebrity Host</p>
+          <h3>DEEPIKA RAM</h3>
         </div>
       </div>
-      <div class="lang-badges">
-        <span class="badge">🇬🇧 English</span>
-        <span class="badge">🇮🇳 Tamil</span>
+      <div class="about-accent-box"></div>
+      <div class="about-accent-box2"></div>
+    </div>
+    <div class="about-right">
+      <span class="sec-eyebrow">The Artist</span>
+      <h2 class="sec-title">ABOUT <span class="rg">DEEPIKA</span></h2>
+      <p class="sec-p">A powerhouse of energy and elegance, Deepika Ram has captivated audiences at over 500 live events across South India — from grand corporate galas to intimate weddings and star-studded cultural shows.</p>
+      <p class="sec-p" style="margin-top:16px">With 5+ years of professional hosting, she is celebrated for her quick wit, seamless audience engagement and the rare ability to leave every audience smiling, energized and thoroughly entertained.</p>
+      <div class="about-traits">
+        <div class="atrait reveal"><h4>Stage Presence</h4><p>Eloquent, enthusiastic & entertaining — captivating every audience from the first word.</p></div>
+        <div class="atrait reveal"><h4>Audience Expert</h4><p>Engages crowds with humor, confidence and quick thinking that keeps energy soaring.</p></div>
+        <div class="atrait reveal"><h4>Team Builder</h4><p>Specializes in corporate team-building that inspires cohesion and lasting motivation.</p></div>
+        <div class="atrait reveal"><h4>Client-First</h4><p>Works closely with every client to craft a truly personalized, unforgettable event experience.</p></div>
+      </div>
+      <div class="lang-pills">
+        <span class="lpill">🇬🇧 English</span>
+        <span class="lpill">🇮🇳 Tamil</span>
       </div>
     </div>
   </div>
@@ -619,336 +401,199 @@ footer {
 
 <!-- SERVICES -->
 <section class="sec services" id="services">
-  <p class="sec-label">What I Do</p>
-  <h2 class="sec-title">MY <span class="gold">SERVICES</span></h2>
-  <p class="sec-sub">From boardrooms to banquets — every event elevated with professionalism and flair.</p>
-  <div class="divider"><span class="divider-star">★</span></div>
+  <div class="svc-intro">
+    <div>
+      <span class="sec-eyebrow">What I Do</span>
+      <h2 class="sec-title">MY <span class="rg">SERVICES</span></h2>
+    </div>
+    <p class="sec-p" style="max-width:340px">From boardrooms to banquets — every event elevated with professionalism, energy and elegance.</p>
+  </div>
   <div class="svc-grid">
-    <div class="svc-card reveal">
-      <div class="svc-num">01</div>
-      <span class="svc-icon">🎙️</span>
-      <h3>Corporate Events</h3>
-      <p>Annual meets, product launches, award nights, dealer meets — delivered with crisp, polished professionalism for top-tier brands.</p>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-num">02</div>
-      <span class="svc-icon">🤝</span>
-      <h3>Team Building</h3>
-      <p>Engaging activities that blend creativity with purpose — building stronger, more cohesive teams through energy and collaboration.</p>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-num">03</div>
-      <span class="svc-icon">💍</span>
-      <h3>Weddings & Celebrations</h3>
-      <p>Engagements, receptions, haldi & sangeet hosted with warmth, joy and unforgettable energy that keeps the celebration alive.</p>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-num">04</div>
-      <span class="svc-icon">🌟</span>
-      <h3>Star-Studded Events</h3>
-      <p>Cultural shows and celebrity-attended events hosted with the poise and charisma that stars and audiences expect.</p>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-num">05</div>
-      <span class="svc-icon">🎂</span>
-      <h3>Birthday Parties</h3>
-      <p>From kids' parties to milestone birthdays — every moment filled with joy, laughter and memories that last a lifetime.</p>
-    </div>
-    <div class="svc-card reveal">
-      <div class="svc-num">06</div>
-      <span class="svc-icon">📺</span>
-      <h3>Celebrity Hosting</h3>
-      <p>Media events, press conferences and brand activations hosted with the confidence and screen-presence of a seasoned celebrity host.</p>
-    </div>
+    <div class="scard reveal" ><div class="scard-num">01</div><span class="scard-icon">🏢</span><h3>Corporate Events</h3><p>Annual meets, product launches, award nights and dealer meets for brands like Zoho, Samsung, TCS, Royal Enfield and more.</p><span class="scard-tag">Most Booked</span></div>
+    <div class="scard reveal"><div class="scard-num">02</div><span class="scard-icon">🤝</span><h3>Team Building</h3><p>Creative activities that cultivate cohesive, motivated teams — blending fun with purpose for lasting organizational impact.</p><span class="scard-tag">Speciality</span></div>
+    <div class="scard reveal"><div class="scard-num">03</div><span class="scard-icon">💍</span><h3>Weddings & Receptions</h3><p>Engagements, receptions and celebrations hosted with warmth, joy and irresistible energy that keeps guests smiling all night.</p><span class="scard-tag">Celebratory</span></div>
+    <div class="scard reveal"><div class="scard-num">04</div><span class="scard-icon">🌟</span><h3>Star-Studded Events</h3><p>Celebrity-attended cultural shows hosted with the poise, charisma and presence that A-list audiences expect and deserve.</p><span class="scard-tag">Premium</span></div>
+    <div class="scard reveal"><div class="scard-num">05</div><span class="scard-icon">🎂</span><h3>Birthday Celebrations</h3><p>From kids' milestone parties to grand adult birthdays — every moment crafted with laughter and memories that last forever.</p><span class="scard-tag">Fun Events</span></div>
+    <div class="scard reveal"><div class="scard-num">06</div><span class="scard-icon">📺</span><h3>Media & Brand Events</h3><p>Press launches, brand activations and media events anchored with camera-ready confidence and celebrity host energy.</p><span class="scard-tag">High Profile</span></div>
   </div>
 </section>
 
 <!-- CLIENTS -->
-<section class="sec clients" id="clients">
-  <p class="sec-label">Distinguished Clientele</p>
-  <h2 class="sec-title">TRUSTED BY THE <span class="gold">BEST</span></h2>
-  <p class="sec-sub">A diverse portfolio of collaborations showcasing the breadth and excellence of Deepika Ram's work.</p>
-  <div class="divider"><span class="divider-star">★</span></div>
-
-  <div class="clients-marquee-wrap">
-    <div class="clients-marquee">
-      <span class="client-badge">ZOHO</span><span class="client-badge">SAMSUNG</span><span class="client-badge">TCS</span><span class="client-badge">ROYAL ENFIELD</span><span class="client-badge">MALABAR GOLD</span><span class="client-badge">HITACHI</span><span class="client-badge">DAIKIN</span><span class="client-badge">AUTODESK</span><span class="client-badge">NISSAN</span><span class="client-badge">VIVO</span><span class="client-badge">TVS</span><span class="client-badge">TANISHQ</span><span class="client-badge">CANARA BANK</span><span class="client-badge">SBI</span><span class="client-badge">KOSTAL</span><span class="client-badge">POORVIKA</span><span class="client-badge">FEVICOL</span><span class="client-badge">DINAMALAR</span>
-      <!-- duplicate for seamless loop -->
-      <span class="client-badge">ZOHO</span><span class="client-badge">SAMSUNG</span><span class="client-badge">TCS</span><span class="client-badge">ROYAL ENFIELD</span><span class="client-badge">MALABAR GOLD</span><span class="client-badge">HITACHI</span><span class="client-badge">DAIKIN</span><span class="client-badge">AUTODESK</span><span class="client-badge">NISSAN</span><span class="client-badge">VIVO</span><span class="client-badge">TVS</span><span class="client-badge">TANISHQ</span><span class="client-badge">CANARA BANK</span><span class="client-badge">SBI</span><span class="client-badge">KOSTAL</span><span class="client-badge">POORVIKA</span><span class="client-badge">FEVICOL</span><span class="client-badge">DINAMALAR</span>
+<section class="clients" id="clients">
+  <div class="cl-head">
+    <span class="sec-eyebrow center" style="justify-content:center">Trusted By</span>
+    <h2 class="sec-title center">DISTINGUISHED <span class="rg">CLIENTELE</span></h2>
+    <p class="sec-p center" style="margin:0 auto">40+ premium brands — a testament to trust, quality and excellence across South India</p>
+  </div>
+  <div class="mwrap">
+    <div class="mtrack">
+      <span class="mitem"><span class="mdot"></span>ZOHO</span><span class="mitem"><span class="mdot"></span>SAMSUNG</span><span class="mitem"><span class="mdot"></span>TCS</span><span class="mitem"><span class="mdot"></span>ROYAL ENFIELD</span><span class="mitem"><span class="mdot"></span>MALABAR GOLD</span><span class="mitem"><span class="mdot"></span>HITACHI</span><span class="mitem"><span class="mdot"></span>DAIKIN</span><span class="mitem"><span class="mdot"></span>AUTODESK</span><span class="mitem"><span class="mdot"></span>NISSAN</span><span class="mitem"><span class="mdot"></span>VIVO</span><span class="mitem"><span class="mdot"></span>TVS</span><span class="mitem"><span class="mdot"></span>TANISHQ</span><span class="mitem"><span class="mdot"></span>CANARA BANK</span><span class="mitem"><span class="mdot"></span>SBI</span><span class="mitem"><span class="mdot"></span>KOSTAL</span><span class="mitem"><span class="mdot"></span>POORVIKA</span><span class="mitem"><span class="mdot"></span>FEVICOL</span><span class="mitem"><span class="mdot"></span>DINAMALAR</span><span class="mitem"><span class="mdot"></span>THE HINDU</span><span class="mitem"><span class="mdot"></span>EURO KIDS</span>
+      <span class="mitem"><span class="mdot"></span>ZOHO</span><span class="mitem"><span class="mdot"></span>SAMSUNG</span><span class="mitem"><span class="mdot"></span>TCS</span><span class="mitem"><span class="mdot"></span>ROYAL ENFIELD</span><span class="mitem"><span class="mdot"></span>MALABAR GOLD</span><span class="mitem"><span class="mdot"></span>HITACHI</span><span class="mitem"><span class="mdot"></span>DAIKIN</span><span class="mitem"><span class="mdot"></span>AUTODESK</span><span class="mitem"><span class="mdot"></span>NISSAN</span><span class="mitem"><span class="mdot"></span>VIVO</span><span class="mitem"><span class="mdot"></span>TVS</span><span class="mitem"><span class="mdot"></span>TANISHQ</span><span class="mitem"><span class="mdot"></span>CANARA BANK</span><span class="mitem"><span class="mdot"></span>SBI</span><span class="mitem"><span class="mdot"></span>KOSTAL</span><span class="mitem"><span class="mdot"></span>POORVIKA</span><span class="mitem"><span class="mdot"></span>FEVICOL</span><span class="mitem"><span class="mdot"></span>DINAMALAR</span><span class="mitem"><span class="mdot"></span>THE HINDU</span><span class="mitem"><span class="mdot"></span>EURO KIDS</span>
     </div>
   </div>
-  <div class="clients-marquee-wrap">
-    <div class="clients-marquee clients-marquee2">
-      <span class="client-badge">ROTARY</span><span class="client-badge">LIONS CLUB</span><span class="client-badge">GREEN TRENDS</span><span class="client-badge">FEMINA SALON</span><span class="client-badge">POLARIS</span><span class="client-badge">MCDERMOTT</span><span class="client-badge">NORTEX</span><span class="client-badge">MYUNGHWA</span><span class="client-badge">QUALITEST</span><span class="client-badge">CASAGRAND</span><span class="client-badge">DRA</span><span class="client-badge">VVD GOLD</span><span class="client-badge">EURO KIDS</span><span class="client-badge">THE HINDU</span><span class="client-badge">AACHI</span><span class="client-badge">BIJLIPAY</span><span class="client-badge">AGNI</span><span class="client-badge">MMIPL</span>
-      <span class="client-badge">ROTARY</span><span class="client-badge">LIONS CLUB</span><span class="client-badge">GREEN TRENDS</span><span class="client-badge">FEMINA SALON</span><span class="client-badge">POLARIS</span><span class="client-badge">MCDERMOTT</span><span class="client-badge">NORTEX</span><span class="client-badge">MYUNGHWA</span><span class="client-badge">QUALITEST</span><span class="client-badge">CASAGRAND</span><span class="client-badge">DRA</span><span class="client-badge">VVD GOLD</span><span class="client-badge">EURO KIDS</span><span class="client-badge">THE HINDU</span><span class="client-badge">AACHI</span><span class="client-badge">BIJLIPAY</span><span class="client-badge">AGNI</span><span class="client-badge">MMIPL</span>
+  <div class="mwrap2">
+    <div class="mtrack mtrack2">
+      <span class="mitem"><span class="mdot"></span>ROTARY</span><span class="mitem"><span class="mdot"></span>LIONS CLUB</span><span class="mitem"><span class="mdot"></span>FEMINA SALON</span><span class="mitem"><span class="mdot"></span>POLARIS</span><span class="mitem"><span class="mdot"></span>MCDERMOTT</span><span class="mitem"><span class="mdot"></span>NORTEX</span><span class="mitem"><span class="mdot"></span>MYUNGHWA</span><span class="mitem"><span class="mdot"></span>QUALITEST</span><span class="mitem"><span class="mdot"></span>CASAGRAND</span><span class="mitem"><span class="mdot"></span>VVD GOLD</span><span class="mitem"><span class="mdot"></span>AACHI</span><span class="mitem"><span class="mdot"></span>BIJLIPAY</span><span class="mitem"><span class="mdot"></span>AGNI</span><span class="mitem"><span class="mdot"></span>MMIPL</span><span class="mitem"><span class="mdot"></span>GREEN TRENDS</span><span class="mitem"><span class="mdot"></span>DRA</span><span class="mitem"><span class="mdot"></span>PRESTIGE</span><span class="mitem"><span class="mdot"></span>SENTINI FLO</span><span class="mitem"><span class="mdot"></span>MINDSPRINT</span><span class="mitem"><span class="mdot"></span>NORDEX</span>
+      <span class="mitem"><span class="mdot"></span>ROTARY</span><span class="mitem"><span class="mdot"></span>LIONS CLUB</span><span class="mitem"><span class="mdot"></span>FEMINA SALON</span><span class="mitem"><span class="mdot"></span>POLARIS</span><span class="mitem"><span class="mdot"></span>MCDERMOTT</span><span class="mitem"><span class="mdot"></span>NORTEX</span><span class="mitem"><span class="mdot"></span>MYUNGHWA</span><span class="mitem"><span class="mdot"></span>QUALITEST</span><span class="mitem"><span class="mdot"></span>CASAGRAND</span><span class="mitem"><span class="mdot"></span>VVD GOLD</span><span class="mitem"><span class="mdot"></span>AACHI</span><span class="mitem"><span class="mdot"></span>BIJLIPAY</span><span class="mitem"><span class="mdot"></span>AGNI</span><span class="mitem"><span class="mdot"></span>MMIPL</span><span class="mitem"><span class="mdot"></span>GREEN TRENDS</span><span class="mitem"><span class="mdot"></span>DRA</span><span class="mitem"><span class="mdot"></span>PRESTIGE</span><span class="mitem"><span class="mdot"></span>SENTINI FLO</span><span class="mitem"><span class="mdot"></span>MINDSPRINT</span><span class="mitem"><span class="mdot"></span>NORDEX</span>
     </div>
   </div>
 </section>
 
 <!-- GALLERY -->
 <section class="sec gallery" id="gallery">
-  <p class="sec-label">Portfolio</p>
-  <h2 class="sec-title">ON <span class="gold">STAGE</span></h2>
-  <p class="sec-sub">A glimpse into the world of MC Deepika Ram — energy, elegance and unforgettable moments.</p>
-  <div class="divider"><span class="divider-star">★</span></div>
-  <div class="gallery-grid">
-    <div class="g-item wide reveal">
-      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80" alt="Corporate Event">
-      <div class="g-overlay"><span class="g-label">Corporate Events</span></div>
-    </div>
-    <div class="g-item reveal">
-      <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&q=80" alt="Wedding Event">
-      <div class="g-overlay"><span class="g-label">Weddings</span></div>
-    </div>
-    <div class="g-item reveal">
-      <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&q=80" alt="Stage Show">
-      <div class="g-overlay"><span class="g-label">Stage Shows</span></div>
-    </div>
-    <div class="g-item reveal">
-      <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&q=80" alt="Team Building">
-      <div class="g-overlay"><span class="g-label">Team Building</span></div>
-    </div>
-    <div class="g-item reveal">
-      <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80" alt="Cultural Show">
-      <div class="g-overlay"><span class="g-label">Cultural Shows</span></div>
-    </div>
-    <div class="g-item reveal">
-      <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80" alt="Birthday">
-      <div class="g-overlay"><span class="g-label">Celebrations</span></div>
-    </div>
+  <div class="gal-head">
+    <div><span class="sec-eyebrow">Portfolio</span><h2 class="sec-title">ON <span class="rg">STAGE</span></h2></div>
+    <p class="sec-p" style="max-width:320px">Glimpses from 500+ events — every frame a story of energy and grace.</p>
   </div>
+  <div class="gal-grid">
+    <div class="gi reveal"><div class="gi-inner" style="background:linear-gradient(145deg,#fdf0f2,#f5d9dd)"><div class="gi-icon">🏢</div><span class="gi-label">Corporate</span></div><div class="gi-overlay"><span class="gi-tag">Corporate Events</span></div></div>
+    <div class="gi reveal"><div class="gi-inner" style="background:linear-gradient(145deg,#fce8ee,#f0c8d0)"><div class="gi-icon">🌟</div><span class="gi-label">Star Events</span></div><div class="gi-overlay"><span class="gi-tag">Star-Studded</span></div></div>
+    <div class="gi reveal"><div class="gi-inner" style="background:linear-gradient(145deg,#f7ece0,#f0ddc8)"><div class="gi-icon">🤝</div><span class="gi-label">Team Building</span></div><div class="gi-overlay"><span class="gi-tag">Team Building</span></div></div>
+    <div class="gi reveal"><div class="gi-inner" style="background:linear-gradient(145deg,#fde8f0,#f5c8d8)"><div class="gi-icon">💍</div><span class="gi-label">Weddings</span></div><div class="gi-overlay"><span class="gi-tag">Weddings</span></div></div>
+    <div class="gi reveal"><div class="gi-inner" style="background:linear-gradient(145deg,#f0f0f8,#e0d8f0)"><div class="gi-icon">🎭</div><span class="gi-label">Cultural</span></div><div class="gi-overlay"><span class="gi-tag">Cultural Shows</span></div></div>
+    <div class="gi reveal"><div class="gi-inner" style="background:linear-gradient(145deg,#fdf5e8,#f5e8c8)"><div class="gi-icon">🎉</div><span class="gi-label">Celebrations</span></div><div class="gi-overlay"><span class="gi-tag">Celebrations</span></div></div>
+  </div>
+  <p style="text-align:center;margin-top:32px;font-size:0.75rem;color:var(--muted);letter-spacing:0.1em">📸 Upload Deepika's actual event photos to replace these placeholders</p>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="sec testimonials">
-  <p class="sec-label">Client Words</p>
-  <h2 class="sec-title">WHAT THEY <span class="gold">SAY</span></h2>
-  <p class="sec-sub">Real words from real events — the impressions Deepika leaves behind.</p>
-  <div class="divider"><span class="divider-star">★</span></div>
-  <div class="testi-grid">
-    <div class="testi-card reveal">
-      <div class="quote-mark">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Deepika Ram was the soul of our Kostal India Annual Meet 2024. Her bilingual fluency and stage energy kept the entire evening alive. Truly a professional of the highest order.</p>
-      <div class="testi-author">
-        <div class="tav">K</div>
-        <div><p class="tname">Rajesh Kumar</p><p class="tsub">HR Head · Kostal India</p></div>
-      </div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="quote-mark">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">Our Zoho team event was elevated by Deepika's infectious energy. She read the room perfectly and had everyone engaged from start to finish. We will definitely book her again.</p>
-      <div class="testi-author">
-        <div class="tav">Z</div>
-        <div><p class="tname">Priya Venkat</p><p class="tsub">Events Manager · Zoho Corp</p></div>
-      </div>
-    </div>
-    <div class="testi-card reveal">
-      <div class="quote-mark">"</div>
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">The Malabar Gold event was flawless — largely because of Deepika. She brought warmth, humor and grace to every segment. Guests are still talking about her performance!</p>
-      <div class="testi-author">
-        <div class="tav">M</div>
-        <div><p class="tname">Anand Krishnan</p><p class="tsub">Brand Director · Malabar Gold</p></div>
-      </div>
-    </div>
+<section class="sec testi">
+  <div style="text-align:center;margin-bottom:64px;position:relative;z-index:2">
+    <span class="sec-eyebrow">Client Love</span>
+    <h2 class="sec-title">WHAT THEY <span style="color:var(--rg-shine)">SAY</span></h2>
+  </div>
+  <div class="tgrid" style="position:relative;z-index:2">
+    <div class="tcard reveal"><div class="tq">"</div><div class="tstars">★★★★★</div><p class="ttext">Deepika Ram was the soul of our Kostal India Annual Meet 2024. Her bilingual fluency and electric stage energy kept the entire evening alive. A true professional.</p><div class="tauthor"><div class="tav">K</div><div><p class="tname">Rajesh Kumar</p><p class="tco">HR Head · Kostal India</p></div></div></div>
+    <div class="tcard reveal"><div class="tq">"</div><div class="tstars">★★★★★</div><p class="ttext">Our Zoho team event was elevated by Deepika's infectious energy. She read the room perfectly and had everyone engaged from start to finish. We will absolutely book her again!</p><div class="tauthor"><div class="tav">Z</div><div><p class="tname">Priya Venkat</p><p class="tco">Events Manager · Zoho Corp</p></div></div></div>
+    <div class="tcard reveal"><div class="tq">"</div><div class="tstars">★★★★★</div><p class="ttext">The Malabar Gold event was flawless — largely because of Deepika. Warmth, humor and grace in every segment. Our guests are still talking about her performance!</p><div class="tauthor"><div class="tav">M</div><div><p class="tname">Anand Krishnan</p><p class="tco">Brand Director · Malabar Gold</p></div></div></div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="sec contact" id="contact">
-  <p class="sec-label">Let's Work Together</p>
-  <h2 class="sec-title">BOOK <span class="gold">DEEPIKA</span></h2>
-  <p class="sec-sub">Ready to make your event unforgettable? Reach out and let's create something extraordinary.</p>
-  <div class="divider"><span class="divider-star">★</span></div>
-  <div class="contact-inner">
+  <div class="contact-wrap">
     <div class="contact-left">
-      <h3>GET IN TOUCH</h3>
-      <p>Whether it's a grand corporate gala, an intimate wedding, or a star-studded cultural show — Deepika brings the energy, elegance and professionalism your event deserves.</p>
-      <div class="c-item">
-        <div class="c-icon">👤</div>
-        <div>
-          <label>Name</label>
-          <span>Deepika Ram — MC & Celebrity Host</span>
-        </div>
+      <span class="sec-eyebrow">Book Me</span>
+      <h2 class="sec-title">LET'S CREATE <span class="rg">MAGIC</span></h2>
+      <p>Whether it's a grand corporate gala, a dream wedding or a star-studded cultural show — Deepika brings the energy, elegance and professionalism your event truly deserves.</p>
+      <div class="ci-list">
+        <div class="ci"><div class="ci-icon">🎙️</div><div><label>Emcee</label><span>MC Deepika Ram — Celebrity Host</span></div></div>
+        <div class="ci"><div class="ci-icon">📞</div><div><label>Phone / WhatsApp</label><a href="tel:+917200763802">+91 72007 63802</a></div></div>
+        <div class="ci"><div class="ci-icon">✉️</div><div><label>Email</label><a href="mailto:deepikaramu1991@gmail.com">deepikaramu1991@gmail.com</a></div></div>
+        <div class="ci"><div class="ci-icon">🗣️</div><div><label>Languages</label><span>English & Tamil</span></div></div>
+        <div class="ci"><div class="ci-icon">📍</div><div><label>Coverage</label><span>Pan Tamil Nadu · Available Across India</span></div></div>
       </div>
-      <div class="c-item">
-        <div class="c-icon">📞</div>
-        <div>
-          <label>Phone / WhatsApp</label>
-          <a href="tel:+917200763802">+91 72007 63802</a>
-        </div>
-      </div>
-      <div class="c-item">
-        <div class="c-icon">✉️</div>
-        <div>
-          <label>Email</label>
-          <a href="mailto:deepikaramu1991@gmail.com">deepikaramu1991@gmail.com</a>
-        </div>
-      </div>
-      <div class="c-item">
-        <div class="c-icon">🗣️</div>
-        <div>
-          <label>Languages</label>
-          <span>English & Tamil</span>
-        </div>
-      </div>
-      <div class="c-item">
-        <div class="c-icon">📍</div>
-        <div>
-          <label>Coverage Area</label>
-          <span>Pan Tamil Nadu · Available Across India</span>
-        </div>
-      </div>
-      <div class="social-row">
-        <a class="soc-btn" href="#" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="2" y="2" width="20" height="20" rx="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
-          </svg>
-        </a>
-        <a class="soc-btn" href="#" aria-label="YouTube">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-            <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="currentColor" stroke="none"/>
-          </svg>
-        </a>
-        <a class="soc-btn" href="#" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-          </svg>
-        </a>
+      <div class="soc">
+        <a class="sbtn" href="#" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a class="sbtn" href="#" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="currentColor" stroke="none"/></svg></a>
+        <a class="sbtn" href="#" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
       </div>
     </div>
-
-    <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-      <div class="f-row">
-        <div class="f-field">
-          <label>Your Name</label>
-          <input type="text" id="fname" name="name" placeholder="Full name" required>
+    <div>
+      <form class="cform" id="cform" onsubmit="handleSubmit(event)">
+        <h3 class="cform-title">Send an Enquiry ✨</h3>
+        <div class="crow">
+          <div class="cf"><label>Your Name</label><input type="text" id="fn" name="name" placeholder="Full name" required></div>
+          <div class="cf"><label>Phone Number</label><input type="tel" id="fp" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
         </div>
-        <div class="f-field">
-          <label>Phone Number</label>
-          <input type="tel" id="fphone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+        <div class="cf"><label>Email Address</label><input type="email" id="fe" name="email" placeholder="you@example.com"></div>
+        <div class="crow">
+          <div class="cf"><label>Event Date</label><input type="date" id="fd" name="event_date"></div>
+          <div class="cf"><label>Event Type</label>
+            <select id="ft" name="event_type">
+              <option value="">— Select Type —</option>
+              <option>Corporate Event / Annual Meet</option>
+              <option>Team Building Activity</option>
+              <option>Wedding / Reception</option>
+              <option>Cultural Show</option>
+              <option>Birthday Celebration</option>
+              <option>Product Launch</option>
+              <option>Star-Studded Event</option>
+              <option>Other</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="f-field">
-        <label>Email Address</label>
-        <input type="email" id="femail" name="email" placeholder="you@example.com">
-      </div>
-      <div class="f-row">
-        <div class="f-field">
-          <label>Event Date</label>
-          <input type="date" id="fdate" name="event_date">
+        <div class="cf"><label>Event Details</label><textarea id="fm" name="message" placeholder="Tell me about your event — venue, audience size, duration…"></textarea></div>
+        <div class="cbtns">
+          <button type="submit" class="cbtn" id="ebtn">✉️ Send Enquiry</button>
+          <button type="button" class="cbtn-wa" id="wabtn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            WhatsApp
+          </button>
         </div>
-        <div class="f-field">
-          <label>Event Type</label>
-          <select id="ftype" name="event_type">
-            <option value="">— Select —</option>
-            <option>Corporate Event / Annual Meet</option>
-            <option>Team Building Activity</option>
-            <option>Wedding / Reception</option>
-            <option>Cultural Show</option>
-            <option>Birthday Celebration</option>
-            <option>Product Launch</option>
-            <option>Celebrity / Star Event</option>
-            <option>Other</option>
-          </select>
-        </div>
-      </div>
-      <div class="f-field">
-        <label>Message / Event Details</label>
-        <textarea id="fmsg" name="message" placeholder="Tell me about your event — venue, audience size, duration…"></textarea>
-      </div>
-      <div class="f-btns">
-        <button type="submit" class="f-submit" id="emailBtn">✉️ Send Enquiry</button>
-        <button type="button" class="f-wa" id="waBtn">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          WhatsApp
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-brand">MC <span>DEEPIKA RAM</span></div>
-  <p class="f-copy">© 2026 MC Deepika Ram · All Rights Reserved · Emcee · Chennai, Tamil Nadu</p>
-  <p class="f-copy" style="color:var(--gold);font-size:0.7rem;letter-spacing:0.1em;">deepikaramu1991@gmail.com</p>
+  <div class="flogo">MC <em>DEEPIKA RAM</em></div>
+  <p class="fcopy">© 2026 MC Deepika Ram · Emcee · Celebrity Host · Corporate Presenter</p>
+  <p class="fcontact">deepikaramu1991@gmail.com · +91 72007 63802</p>
 </footer>
 
-<div class="toast" id="toast">✦ Your booking enquiry has been sent! Deepika will reach out to you shortly.</div>
+<div class="toast" id="toast">🌹 Enquiry sent! Deepika will contact you shortly.</div>
 
 <script>
-  // Cursor
-  const cur = document.getElementById('cur'), curR = document.getElementById('curR');
-  document.addEventListener('mousemove', e => {
-    cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px';
-    setTimeout(() => { curR.style.left = e.clientX+'px'; curR.style.top = e.clientY+'px'; }, 55);
-  });
+// Cursor
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  setTimeout(()=>{cur2.style.left=e.clientX+'px';cur2.style.top=e.clientY+'px';},55);
+});
 
-  // Nav scroll
-  window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('s', window.scrollY > 60);
-  });
+// Nav
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('sc',window.scrollY>60);
+});
 
-  // WhatsApp
-  document.getElementById('waBtn').addEventListener('click', () => {
-    const name  = document.getElementById('fname').value  || 'Not provided';
-    const phone = document.getElementById('fphone').value || 'Not provided';
-    const email = document.getElementById('femail').value || 'Not provided';
-    const date  = document.getElementById('fdate').value  || 'Not specified';
-    const type  = document.getElementById('ftype').value  || 'Not selected';
-    const msg   = document.getElementById('fmsg').value   || '-';
-    const text = `Hi Deepika! I found your portfolio and want to book you.\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nEvent Date: ${date}\nEvent Type: ${type}\nDetails: ${msg}`;
-    window.open('https://wa.me/917200763802?text='+encodeURIComponent(text), '_blank');
-  });
+// WhatsApp
+document.getElementById('wabtn').addEventListener('click',()=>{
+  const n=document.getElementById('fn').value||'Not provided';
+  const p=document.getElementById('fp').value||'Not provided';
+  const e=document.getElementById('fe').value||'Not provided';
+  const d=document.getElementById('fd').value||'Not specified';
+  const t=document.getElementById('ft').value||'Not selected';
+  const m=document.getElementById('fm').value||'-';
+  const txt=`Hi Deepika! I found your portfolio and want to book you.\n\nName: ${n}\nPhone: ${p}\nEmail: ${e}\nEvent Date: ${d}\nEvent Type: ${t}\nDetails: ${m}`;
+  window.open('https://wa.me/917200763802?text='+encodeURIComponent(txt),'_blank');
+});
 
-  // Email via Formspree
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('emailBtn');
-    btn.textContent = 'Sending…'; btn.disabled = true;
-    try {
-      const res = await fetch('https://formspree.io/f/deepikaramu1991', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(e.target)
-      });
-      const t = document.getElementById('toast');
-      t.textContent = res.ok
-        ? '✦ Enquiry sent to deepikaramu1991@gmail.com! Deepika will contact you soon.'
-        : '⚠ Email failed. Please use WhatsApp instead.';
-      t.classList.add('show');
-      if (res.ok) e.target.reset();
-      setTimeout(() => t.classList.remove('show'), 5500);
-    } catch {
-      const t = document.getElementById('toast');
-      t.textContent = '⚠ Network error. Please WhatsApp Deepika directly.';
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 5000);
-    }
-    btn.textContent = '✉️ Send Enquiry'; btn.disabled = false;
-  }
-
-  // Scroll reveal
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) {
-        en.target.style.opacity = '1';
-        en.target.style.transform = 'translateY(0)';
-      }
+// Email
+async function handleSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('ebtn');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const res=await fetch('https://formspree.io/f/deepikaramu1991',{
+      method:'POST',headers:{'Accept':'application/json'},body:new FormData(e.target)
     });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(28px)';
-    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-    obs.observe(el);
+    const t=document.getElementById('toast');
+    t.textContent=res.ok?'🌹 Enquiry sent to deepikaramu1991@gmail.com! Deepika will contact you soon.':'⚠ Email failed. Please use WhatsApp.';
+    t.classList.add('show');
+    if(res.ok)e.target.reset();
+    setTimeout(()=>t.classList.remove('show'),5500);
+  }catch{
+    const t=document.getElementById('toast');
+    t.textContent='⚠ Network error. Please WhatsApp Deepika directly.';
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),5000);
+  }
+  btn.textContent='✉️ Send Enquiry';btn.disabled=false;
+}
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)'}
   });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(28px)';
+  el.style.transition='opacity 0.8s ease,transform 0.8s ease';
+  obs.observe(el);
+});
 </script>
 </body>
 </html>
